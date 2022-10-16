@@ -6,13 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="63dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/mealerlogo" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="96dp" />
+
+        <Button
+            android:id="@+id/Register"
+            android:layout_width="234dp"
+            android:layout_height="67dp"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="#EC1B24"
+            android:text="Register" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="27dp" />
+
+        <Button
+            android:id="@+id/Login"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:backgroundTint="#E81D26"
+            android:text="Log in" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
