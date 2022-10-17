@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
-    tools:context=".Register">
+    tools:context=".signinselect">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
-            android:text="Registration"
+            android:text="Sign in"
             android:textColor="#EC1B24" />
 
         <Space
@@ -68,7 +68,7 @@
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="#EB1B24"
                 android:gravity="center_horizontal"
-                android:onClick="openClientRegistration"
+                android:onClick="signInClient"
                 android:text="Client" />
 
             <Button
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="#EB1B24"
-                android:onClick="openCookRegistration"
+                android:onClick="signInCook"
                 android:text="Cook" />
         </LinearLayout>
 

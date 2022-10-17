@@ -72,11 +72,12 @@
             android:layout_height="28dp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/onclick"
             android:layout_width="309dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:backgroundTint="#EC1B24"
+            android:onClick="openCookWelcome"
             android:text="Confirm" />
 
     </LinearLayout>
