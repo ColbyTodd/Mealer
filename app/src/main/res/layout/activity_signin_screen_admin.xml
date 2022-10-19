@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/logo"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    tools:context=".signinselect">
+    tools:context=".SigninScreenAdmin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="55dp" />
+            android:layout_height="12dp" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -26,7 +26,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="16dp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/textView4"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
-            android:text="Sign in"
+            android:text="Admin Sign In"
             android:textColor="#EC1B24" />
 
         <Space
@@ -43,56 +43,55 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="336dp"
+            android:layout_width="367dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
-            android:text="Select the Proper Account Type"
+            android:gravity="center_horizontal|left"
+            android:text="Email"
             android:textColor="#EC1B24" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="66dp" />
-
-        <LinearLayout
-            android:layout_width="372dp"
+        <EditText
+            android:id="@+id/Email"
+            android:layout_width="381dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/openClientRegistration"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#EB1B24"
-                android:gravity="center_horizontal"
-                android:onClick="signInClient"
-                android:text="Client" />
-
-            <Button
-                android:id="@+id/openCook"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#EB1B24"
-                android:onClick="signInCook"
-                android:text="Cook" />
-
-            <Button
-                android:id="@+id/openAdmin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="#EB1B24"
-                android:onClick="signInAdmin"
-                android:text="Admin" />
-        </LinearLayout>
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="239dp" />
+            android:layout_height="35dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="367dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal|left"
+            android:text="Password"
+            android:textColor="#EC1B24" />
+
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="381dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="55dp" />
+
+        <Button
+            android:id="@+id/confirm"
+            android:layout_width="309dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="#EC1B24"
+            android:onClick="openAdminWelcome"
+            android:text="Confirm" />
 
     </LinearLayout>
 

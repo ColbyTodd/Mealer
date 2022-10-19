@@ -6,14 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class LoginClient extends AppCompatActivity {
+public class SigninScreenAdmin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_client);
+        setContentView(R.layout.activity_signin_screen_admin);
     }
-    public void openClientWelcome(View v){
-        startActivity(new Intent(this, ClientWelcome.class));
+    public void openAdminWelcome(View v){
+        startActivity(new Intent(this, AdminWelcome.class));
     }
 }
