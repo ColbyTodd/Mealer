@@ -13,6 +13,13 @@
         android:theme="@style/Theme.Mealer"
         tools:targetApi="31">
         <activity
+            android:name=".SigninScreenAdmin"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".SigninScreenCook"
             android:exported="false">
             <meta-data
@@ -41,7 +48,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginCook2"
+            android:name=".RegisterCook2"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -69,14 +76,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginClient"
+            android:name=".RegisterClient"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginCook"
+            android:name=".RegisterCook"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

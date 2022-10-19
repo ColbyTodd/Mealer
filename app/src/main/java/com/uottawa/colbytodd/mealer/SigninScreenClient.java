@@ -11,9 +11,10 @@ public class SigninScreenClient extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signin_screen);
+        setContentView(R.layout.activity_signin_screen_client);
     }
     public void openClientWelcome(View v){
         startActivity(new Intent(this, ClientWelcome.class));
     }
+
 }

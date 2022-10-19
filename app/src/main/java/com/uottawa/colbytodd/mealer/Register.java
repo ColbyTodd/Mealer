@@ -14,9 +14,9 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
     }
     public void openClientRegistration(View v){
-        startActivity(new Intent(this, LoginClient.class));
+        startActivity(new Intent(this, RegisterClient.class));
     }
     public void openCookRegistration(View v){
-        startActivity(new Intent(this, LoginCook.class));
+        startActivity(new Intent(this, RegisterCook.class));
     }
 }

@@ -4,20 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/logo"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    tools:context=".LoginCook">
+    tools:context=".RegisterClient">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-28dp">
+        android:orientation="vertical">
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="13dp" />
+            android:layout_height="12dp" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -36,12 +34,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
-            android:text="Cook Registration"
+            android:text="Client Registration"
             android:textColor="#EC1B24" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="15dp" />
 
         <TextView
             android:id="@+id/textView3"
@@ -61,6 +59,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/firstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="First Name" />
@@ -71,6 +70,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Last Name" />
@@ -78,9 +78,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email Address" />
@@ -88,9 +89,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password" />
@@ -98,57 +100,67 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Food Pickup Address" />
+                android:hint="Address" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/creditCardNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Please Provide a Brief Profile Description" />
+                android:hint="Credit Card Number" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="216dp"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/expiration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Expiration Date (MM/YY)" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cvv"
+                        android:layout_width="193dp"
+                        android:layout_height="wrap_content"
+                        android:hint="CVV" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="14dp"
-            android:layout_gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="330dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="Upload an Image of a Void Cheque" />
+            android:layout_height="10dp" />
 
         <Button
-            android:id="@+id/button4"
-            android:layout_width="367dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:backgroundTint="#EB1B24"
-            android:text="Select and Upload" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="12dp" />
-
-        <Button
-            android:id="@+id/onclick"
+            android:id="@+id/confirm"
             android:layout_width="309dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:backgroundTint="#EC1B24"
-            android:onClick="openCookRegistration2"
-            android:text="Continue" />
+            android:onClick="openClientWelcome"
+            android:text="Confirm" />
 
     </LinearLayout>
 

@@ -19,4 +19,7 @@ public class signinselect extends AppCompatActivity {
     public void signInCook(View v){
         startActivity(new Intent(this, SigninScreenCook.class));
     }
+    public void signInAdmin(View v){
+        startActivity(new Intent(this, SigninScreenAdmin.class));
+    }
 }
