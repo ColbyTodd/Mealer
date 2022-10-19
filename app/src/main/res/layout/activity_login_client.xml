@@ -146,7 +146,7 @@
             android:layout_height="10dp" />
 
         <Button
-            android:id="@+id/onclick"
+            android:id="@+id/confirm"
             android:layout_width="309dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

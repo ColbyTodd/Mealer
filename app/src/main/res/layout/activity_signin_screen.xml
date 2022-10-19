@@ -58,7 +58,7 @@
             android:layout_gravity="center_horizontal"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Email" />
 
         <Space
             android:layout_width="match_parent"
@@ -80,14 +80,14 @@
             android:layout_gravity="center_horizontal"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Name" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="55dp" />
 
         <Button
-            android:id="@+id/onclick"
+            android:id="@+id/confirm"
             android:layout_width="309dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
