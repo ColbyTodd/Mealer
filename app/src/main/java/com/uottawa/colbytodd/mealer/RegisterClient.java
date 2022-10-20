@@ -296,13 +296,12 @@ public class RegisterClient extends AppCompatActivity {
         Date d = new Date();
         int currentYear = (d.getYear() + 1900) % 100;
         int year = 0, month = 0;
+        boolean swap = false;
         for(char i:sexpiration.toCharArray()){
-
-            boolean swap = false;
-            if(i < '0' || i > '9' || i != '/'){
+            if((i < '0' || i > '9') && i != '/'){
                 expirationflag = true;
             }
-            else if(i == '/'){
+            if(i == '/'){
                 swap = true;
             }
             else if(!swap){
