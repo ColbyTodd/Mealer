@@ -172,6 +172,14 @@ public class RegisterClient extends AppCompatActivity {
 
     public void openClientWelcome(View v){
         focus.requestFocus();
+        createAccount(firstName.getText().toString(),
+                lastName.getText().toString(),
+                email.getText().toString(),
+                password.getText().toString(),
+                address.getText().toString(),
+                creditCardNumber.getText().toString(),
+                expiration.getText().toString(),
+                CVV.getText().toString());
         if((firstNameText.length()*lastNameText.length()*emailText.length()*passwordText.length()*addressText.length()*creditCardText.length()*expirationText.length()*cvvText.length())==0) { //if there is a text box with a length of zero, the button will not function
             Toast.makeText(getApplicationContext(), "Missing Field(s)", Toast.LENGTH_LONG).show();
         }
@@ -257,7 +265,7 @@ public class RegisterClient extends AppCompatActivity {
         mDocRef.set(user);
     }
 
-    public void openClientWelcome(View v){
+    /*public void openClientWelcome(View v){ //
         EditText first = (EditText) findViewById(R.id.firstName);
         EditText last = (EditText) findViewById(R.id.lastName);
         EditText email = (EditText) findViewById(R.id.email);
@@ -277,7 +285,7 @@ public class RegisterClient extends AppCompatActivity {
                 cvv.getText().toString());
 
         startActivity(new Intent(this, ClientWelcome.class));
-    }
+    }*/
 
     private void reload() { }
 
