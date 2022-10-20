@@ -293,10 +293,11 @@ public class RegisterClient extends AppCompatActivity {
         }
 
         //Check valid expiration date
+        Date d = new Date();
+        int currentYear = (d.getYear() + 1900) % 100;
+        int year = 0, month = 0;
         for(char i:sexpiration.toCharArray()){
-            Date d = new Date();
-            int currentYear = (d.getYear() + 1900) % 100;
-            int year = 0, month = 0;
+
             boolean swap = false;
             if(i < '0' || i > '9' || i != '/'){
                 expirationflag = true;
@@ -310,13 +311,13 @@ public class RegisterClient extends AppCompatActivity {
             else if(swap){
                 year = year*10 + i - '0';
             }
+        }
 
-            if(year < currentYear){
-                expirationflag = true;
-            }
-            else if(year == currentYear && month < d.getMonth() + 1){
-                expirationflag = true;
-            }
+        if(year < currentYear){
+            expirationflag = true;
+        }
+        else if(year == currentYear && month < d.getMonth() + 1){
+            expirationflag = true;
         }
 
         //Check valid cvv
@@ -326,30 +327,30 @@ public class RegisterClient extends AppCompatActivity {
             }
         }
 
-        if(sfirst == null || sfirst.length() > 25){
+        if(sfirst.length() < 1 || sfirst.length() > 25){
             t.setText("First name must be from 1 to 25 characters");
         }
-        else if(slast == null || slast.length() > 25){
+        else if(slast.length() < 1 || slast.length() > 25){
             t.setText("Last name must be from 1 to 25 characters");
         }
         //For now assume valid email address is given and any password within 8 - 25 characters is valid
-        else if(semail == null){
+        else if(semail.length() < 1){
             t.setText("Please put a valid email");
         }
-        else if(spassword == null || spassword.length() > 25 || spassword.length() < 8){
+        else if(spassword.length() > 25 || spassword.length() < 8){
             t.setText("Password must be 8 to 25 characters");
         }
         //Assume address is valid if field is not blank
-        else if(saddress == null){
+        else if(saddress.length() < 1){
             t.setText("Please put a valid address");
         }
-        else if(scard == null || cardflag || scard.length() != 16){
+        else if(scard.length() < 1|| cardflag || scard.length() != 16){
             t.setText("Please put a valid credit card");
         }
-        else if(sexpiration == null || expirationflag || sexpiration.length() != 5){
+        else if(sexpiration.length() < 1 || expirationflag || sexpiration.length() != 5){
             t.setText("Please put a valid expiration date");
         }
-        else if(scvv == null || scvv.length() != 3 || scvvflag){
+        else if(scvv.length() < 1 || scvv.length() != 3 || scvvflag){
             t.setText("Please enter a valid cvv");
         }
         else{
