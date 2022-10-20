@@ -11,10 +11,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class RegisterCook extends AppCompatActivity {
 
     EditText firstName, lastName, email, password, address, focus;
     String firstNameText="",lastNameText="",emailText="",passwordText="",addressText="";
+
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private DocumentReference mDocRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +109,17 @@ public class RegisterCook extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Missing Field(s)", Toast.LENGTH_LONG).show();
         }
         else{
+            mDocRef = db.document("cooks/" + emailText);
+            Map<String, Object> user = new HashMap<String, Object>();
+
+            user.put("first", firstNameText);
+            user.put("last", lastNameText);
+            user.put("email", emailText);
+            user.put("password", passwordText);
+            user.put("address", addressText);
+
+            mDocRef.set(user);
+
             startActivity(new Intent(this, RegisterCook2.class));
         }
     }
