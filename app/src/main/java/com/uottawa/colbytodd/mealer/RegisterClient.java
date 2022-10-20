@@ -12,16 +12,27 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterClient extends AppCompatActivity {
-    private static final String TAG = "EmailPassword";
+    private static final String TAG = "RegisterClient";
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private DocumentReference mDocRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,34 +57,40 @@ public class RegisterClient extends AppCompatActivity {
     }
     // [END on_start_check_user]
 
-    private void createAccount(String email, String password) {
-        // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterClient.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
-        // [END create_user_with_email]
+    private void createAccount(String first, String last, String email, String password, String address, String card, String expiration, String cvv) {
+        // Create a new user with a first and last name
+        mDocRef = db.document("clients/" + email);
+        Map<String, Object> user = new HashMap<String, Object>();
+        user.put("first", first);
+        user.put("last", last);
+        user.put("email", email);
+        user.put("password", password);
+        user.put("address", address);
+        user.put("card", card);
+        user.put("expiration", expiration);
+        user.put("cvv", cvv);
+
+        mDocRef.set(user);
     }
 
     public void openClientWelcome(View v){
+        EditText first = (EditText) findViewById(R.id.firstName);
+        EditText last = (EditText) findViewById(R.id.lastName);
         EditText email = (EditText) findViewById(R.id.email);
         EditText password = (EditText) findViewById(R.id.password);
+        EditText address = (EditText) findViewById(R.id.address);
+        EditText card = (EditText) findViewById(R.id.creditCardNumber);
+        EditText expiration = (EditText) findViewById(R.id.expiration);
+        EditText cvv = (EditText) findViewById(R.id.cvv);
 
-        createAccount(email.getText().toString(), password.getText().toString());
+        createAccount(first.getText().toString(),
+                last.getText().toString(),
+                email.getText().toString(),
+                password.getText().toString(),
+                address.getText().toString(),
+                card.getText().toString(),
+                expiration.getText().toString(),
+                cvv.getText().toString());
 
         startActivity(new Intent(this, ClientWelcome.class));
     }
