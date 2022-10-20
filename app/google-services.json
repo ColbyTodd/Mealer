@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1037968972181",
+    "project_id": "mealer-61a45",
+    "storage_bucket": "mealer-61a45.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037968972181:android:e2bf9e1d51b6a71db6be9c",
+        "android_client_info": {
+          "package_name": "com.uottawa.colbytodd.mealer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1037968972181-oj3keiupv5d9387iv6rn7rbjafusdtnt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4A8MoV7c_dUNq3EijKk_lihdK_-y3NWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1037968972181-oj3keiupv5d9387iv6rn7rbjafusdtnt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
