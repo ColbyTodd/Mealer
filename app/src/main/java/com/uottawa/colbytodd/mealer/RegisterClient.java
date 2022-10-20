@@ -283,8 +283,7 @@ public class RegisterClient extends AppCompatActivity {
 
         //Input checking (Can be made more clean later)
         //remove whitespace
-        semail.replaceAll(" ", "");
-        scard.replaceAll(" ", "");
+        scard = scard.replaceAll("\\s+", "");
 
         //Check credit card is all integers
         for(char i:scard.toCharArray()){
