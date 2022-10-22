@@ -63,6 +63,12 @@ public class SigninScreenCook extends AppCompatActivity {
         TextView messageText = findViewById(R.id.CookMessage);
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
-        loginUser(email, password, messageText);
+        TextView t = findViewById(R.id.signInFeedback);
+        if(email.length()!=0 && password.length()!=0){
+            loginUser(email, password, messageText);
+        }
+        else{
+            t.setText("Email/Password Cannot be Empty");
+        }
     }
 }
