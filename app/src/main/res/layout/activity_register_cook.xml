@@ -52,7 +52,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/clientRegistrationFeedback"
+            android:id="@+id/RegistrationFeedback"
             android:layout_width="336dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

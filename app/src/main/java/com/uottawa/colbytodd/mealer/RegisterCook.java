@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,8 +19,8 @@ import java.util.Map;
 
 public class RegisterCook extends AppCompatActivity {
 
-    EditText firstName, lastName, email, password, address, focus;
-    String firstNameText="",lastNameText="",emailText="",passwordText="",addressText="";
+    //EditText firstName, lastName, email, password, address, focus;
+    //String firstNameText="",lastNameText="",emailText="",passwordText="",addressText="";
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference mDocRef;
@@ -29,7 +29,62 @@ public class RegisterCook extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_cook);
+    }
+    public void createAccount(String first, String last, String email, String password, String address) {
+        // Create a new client
+        mDocRef = db.document("cooks/" + email);
+        Map<String, Object> user = new HashMap<String, Object>();
 
+
+        user.put("first", first);
+        user.put("last", last);
+        user.put("email", email);
+        user.put("password", password);
+        user.put("address", address);
+
+        mDocRef.set(user);
+
+        startActivity(new Intent(this, RegisterCook2.class));
+    }
+    public void openCookRegistration2(View v){
+        EditText first = findViewById(R.id.firstName2);
+        EditText last = findViewById(R.id.lastName2);
+        EditText email = findViewById(R.id.email2);
+        EditText password = findViewById(R.id.password2);
+        EditText address = findViewById(R.id.address2);
+
+        String sfirst = first.getText().toString();
+        String slast =  last.getText().toString();
+        String semail = email.getText().toString();
+        String spassword = password.getText().toString();
+        String saddress = address.getText().toString();
+
+        TextView t = findViewById(R.id.RegistrationFeedback);
+
+        //Input checking (Can be made more clean later)
+
+        if(sfirst.length() < 1 || sfirst.length() > 25){
+            t.setText("First name must be from 1 to 25 characters");
+        }
+        else if(slast.length() < 1 || slast.length() > 25){
+            t.setText("Last name must be from 1 to 25 characters");
+        }
+        //For now assume valid email address is given and any password within 8 - 25 characters is valid
+        else if(semail.length() < 1){
+            t.setText("Please put a valid email");
+        }
+        else if(spassword.length() > 25 || spassword.length() < 8){
+            t.setText("Password must be 8 to 25 characters");
+        }
+        //Assume address is valid if field is not blank
+        else if(saddress.length() < 1){
+            t.setText("Please put a valid address");
+        }
+        else{
+            createAccount(sfirst, slast, semail, spassword, saddress);
+        }
+    }
+/*
         focus = findViewById(R.id.focus2);
         firstName = findViewById(R.id.firstName2);
         lastName = findViewById(R.id.lastName2);
@@ -162,5 +217,5 @@ public class RegisterCook extends AppCompatActivity {
             }
         }
         return true;
-    }
+    }*/
 }
