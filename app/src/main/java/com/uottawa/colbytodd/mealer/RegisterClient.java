@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -275,7 +274,7 @@ public class RegisterClient extends AppCompatActivity {
         String sexpiration = expiration.getText().toString();
         String scvv = cvv.getText().toString();
 
-        TextView t = findViewById(R.id.clientRegistrationFeedback);
+        TextView t = findViewById(R.id.RegistrationFeedback);
 
         boolean cardflag = false;
         boolean expirationflag = false;
