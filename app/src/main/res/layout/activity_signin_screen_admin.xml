@@ -37,9 +37,27 @@
             android:text="Admin Sign In"
             android:textColor="#EC1B24" />
 
+        <TextView
+            android:id="@+id/AdminMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text=""
+            android:textColor="#FF0000"
+            android:textSize="20sp" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="15dp" />
+
+        <EditText
+            android:id="@+id/AdminEmail"
+            android:layout_width="381dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/clientRegistrationFeedback"
@@ -50,17 +68,19 @@
             android:text="Email"
             android:textColor="#EC1B24" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
         <EditText
-            android:id="@+id/Email"
+            android:id="@+id/AdminPassword"
             android:layout_width="381dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:ems="10"
-            android:inputType="textPersonName" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="35dp" />
+            android:inputType="textPassword"
+            android:autofillHints=""
+            tools:ignore="LabelFor"/>
 
         <TextView
             android:id="@+id/textView6"
@@ -70,14 +90,6 @@
             android:gravity="center_horizontal|left"
             android:text="Password"
             android:textColor="#EC1B24" />
-
-        <EditText
-            android:id="@+id/Password"
-            android:layout_width="381dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:ems="10"
-            android:inputType="textPassword" />
 
         <Space
             android:layout_width="match_parent"
