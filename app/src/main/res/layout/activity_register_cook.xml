@@ -72,7 +72,7 @@
                 android:id="@+id/firstName2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="First Name" />
+                android:hint="First Name " />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -119,7 +119,7 @@
                 android:id="@+id/address2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Food Pickup Address" />
+                android:hint="Pickup Address" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
