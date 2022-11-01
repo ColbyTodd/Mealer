@@ -29,6 +29,8 @@ public class AdminWelcome extends AppCompatActivity implements PopupMenu.OnMenuI
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.complaints:
+                Intent i = new Intent(this, Complaints.class);
+                startActivity(i);
                 return true;
             default:
                 return false;
