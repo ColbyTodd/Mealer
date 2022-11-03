@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ComplaintCooks">
+    tools:context=".ComplaintList">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,16 +12,18 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/Title"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView3"
+            android:layout_width="257dp"
             android:layout_height="wrap_content"
-            android:text="Cooks"
-            android:textSize="45dp" />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="Complaints"
+            android:textColor="#EC1B24"
+            android:textSize="20sp" />
 
         <ListView
-            android:id="@+id/cooksList"
+            android:id="@+id/complaintList"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

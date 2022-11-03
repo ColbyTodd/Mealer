@@ -9,14 +9,14 @@ import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentId;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
-public class Complaints extends AppCompatActivity {
+public class ComplaintCooks extends AppCompatActivity {
     List<DocumentSnapshot> myListOfDocuments;
     String[] documents = new String[10];
 
@@ -38,7 +38,6 @@ public class Complaints extends AppCompatActivity {
                             for(DocumentSnapshot document: myListOfDocuments){
                                 documents[i] = document.get("Document ID").toString();
                             }
-
                         }
                     }
                 });
