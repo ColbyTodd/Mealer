@@ -25,7 +25,7 @@ public class ComplaintList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_complaints);
+        setContentView(R.layout.activity_complaint_list);
         FirebaseFirestore.getInstance().collection("complaints").document("cjhtodd11@gmail.com").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -49,7 +49,7 @@ public class ComplaintList extends AppCompatActivity {
                 }
             }
         });
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_complaints, fields);
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.cook_lists, fields);
         ListView complaintList = (ListView) findViewById(R.id.complaintList);
         complaintList.setAdapter(adapter);
     }

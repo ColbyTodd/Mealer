@@ -3,7 +3,11 @@ package com.uottawa.colbytodd.mealer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -50,9 +54,19 @@ public class ComplaintCooks extends AppCompatActivity {
                             //Shows the list of cooks with complaints on the app
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.cook_lists, documents);
                             cooksList.setAdapter(adapter);
+                            cooksList.setOnItemClickListener(new OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                                    Intent intent = new Intent(getApplicationContext(), ComplaintList.class);
+                                    startActivity(intent);
+                                }
+                            });
                         }
                     }
                 });
 
     }
+
+
+
 }
