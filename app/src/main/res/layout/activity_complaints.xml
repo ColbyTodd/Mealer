@@ -6,22 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ComplaintCooks">
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/cooksList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cooks"
-            android:textSize="45dp" />
-
-        <ListView
-            android:id="@+id/cooksList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+        android:layout_height="match_parent" >
+    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

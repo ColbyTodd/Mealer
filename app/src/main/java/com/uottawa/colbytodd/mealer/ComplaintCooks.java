@@ -12,19 +12,38 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ComplaintCooks extends AppCompatActivity {
-    List<DocumentSnapshot> myListOfDocuments;
-    String[] documents = new String[10];
+    //List<DocumentSnapshot> myListOfDocuments;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    List<String> documents = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaints);
+        ListView cooksList = (ListView) findViewById(R.id.cooksList);
 
+        db.collection("/complaints")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            int i = 0;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                documents.add(document.getId());
+                                i++;
+                            }
+                        }
+                    }
+                });
+        /*
         FirebaseFirestore.getInstance()
                 .collection("complaints")
                 .limit(10)
@@ -34,16 +53,19 @@ public class ComplaintCooks extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             myListOfDocuments = task.getResult().getDocuments();
-                            int i = 0;
-                            for(DocumentSnapshot document: myListOfDocuments){
-                                documents[i] = document.get("Document ID").toString();
+                            if(myListOfDocuments != null){
+                                int i = 0;
+                                for(DocumentSnapshot document: myListOfDocuments) {
+                                    if(document.exists()) {
+                                        documents[i] = document.getId().toString();
+                                        i++;
+                                    }
+                                }
                             }
                         }
                     }
-                });
-
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_complaints, documents);
-        ListView cooksList = (ListView) findViewById(R.id.cooksList);
+                });*/
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.cook_lists, documents);
         cooksList.setAdapter(adapter);
     }
 }
