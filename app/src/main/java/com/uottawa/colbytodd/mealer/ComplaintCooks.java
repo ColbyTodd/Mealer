@@ -11,6 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,21 +58,14 @@ public class ComplaintCooks extends AppCompatActivity {
                             cooksList.setOnItemClickListener(new OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                                    Intent intent = new Intent(getApplicationContext(), ComplaintList.class);
-                                    startActivity(intent);
+                                    Intent i = new Intent(ComplaintCooks.this, ComplaintList.class);
+                                    i.putExtra("email",documents.get(position));
+                                    startActivity(i);
                                 }
                             });
                         }
                     }
                 });
-        cooksList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent i = new Intent(ComplaintCooks.this, ComplaintList.class);
-                i.putExtra("email",documents.get(position));
-                startActivity(i);
-            }
-        });
     }
 
     public void onSearchClick(View view){
