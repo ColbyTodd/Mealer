@@ -6,10 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ComplaintCooks">
 
-    <ListView
-        android:id="@+id/cooksList"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </ListView>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cooks List"
+            android:textColor="#EC1B24"
+            android:textSize="35dp" />
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="Search"
+            android:inputType="textPersonName" />
+
+        <ListView
+            android:id="@+id/cooksList"
+            android:layout_width="match_parent"
+            android:layout_height="554dp">
+
+        </ListView>
+
+        <Button
+            android:id="@+id/searchbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#EC1B24"
+            android:onClick="onSearchClick"
+            android:text="Search" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

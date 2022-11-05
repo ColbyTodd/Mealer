@@ -7,11 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -28,20 +32,19 @@ public class ComplaintCooks extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaints);
-        ListView cooksList = (ListView) findViewById(R.id.cooksList);
+        ListView cooksList = findViewById(R.id.cooksList);
 
         //Querys the database for complaints
         db.collection("complaints")
+                .limit(10)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            int i = 0;
                             //adds cooks with complaints to a list
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 documents.add(document.getId());
-                                i++;
                             }
 
                             if(documents.size() == 0){
@@ -51,6 +54,13 @@ public class ComplaintCooks extends AppCompatActivity {
                             //Shows the list of cooks with complaints on the app
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.cook_lists, documents);
                             cooksList.setAdapter(adapter);
+                            cooksList.setOnItemClickListener(new OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                                    Intent intent = new Intent(getApplicationContext(), ComplaintList.class);
+                                    startActivity(intent);
+                                }
+                            });
                         }
                     }
                 });
@@ -63,4 +73,52 @@ public class ComplaintCooks extends AppCompatActivity {
             }
         });
     }
+
+    public void onSearchClick(View view){
+        EditText cook = (EditText) findViewById(R.id.search);
+        ListView cooksList = findViewById(R.id.cooksList);
+        /*String top, bot = cook.getText().toString();
+        int len = bot.length();
+        //Creates query parameters
+        String allButLast = bot.substring(0, len - 1);
+        top = allButLast + (char) (bot.charAt(len - 1) + 1);*/
+
+
+        db.collection("complaints")
+                //.whereGreaterThanOrEqualTo("Document ID", bot)
+                //.whereLessThan("Document ID", top)
+                .whereEqualTo("Document ID", cook.getText())
+                .limit(10)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            documents = new ArrayList<>();
+                            //adds cooks with complaints to a list
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                documents.add(document.getId());
+                            }
+
+                            if (documents.size() == 0) {
+                                documents.add("No results.");
+                            }
+
+                            //Shows the list of cooks with complaints on the app
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.cook_lists, documents);
+                            cooksList.setAdapter(adapter);
+                            cooksList.setOnItemClickListener(new OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    Intent intent = new Intent(getApplicationContext(), ComplaintList.class);
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                    }
+                });
+    }
+
+
+
 }
