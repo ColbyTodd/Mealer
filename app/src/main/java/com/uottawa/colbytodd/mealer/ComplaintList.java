@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ import java.util.Map;
 public class ComplaintList extends AppCompatActivity {
     List<String> documents = new ArrayList<String>();
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    int highlightedPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public class ComplaintList extends AppCompatActivity {
         setContentView(R.layout.activity_complaint_list);
         Bundle extras = getIntent().getExtras();
         ListView complaintList = (ListView) findViewById(R.id.complaintList);
+        Button deleteComplaint = (Button) findViewById(R.id.deleteComplaint);
 
         if (extras != null) {
             String email = extras.getString("email");
@@ -50,6 +55,24 @@ public class ComplaintList extends AppCompatActivity {
                             }
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.cook_lists, documents);
                             complaintList.setAdapter(adapter);
+                            complaintList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                                    highlightedPosition=position;
+                                }
+                            });
+                            deleteComplaint.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    if (highlightedPosition==-1){
+                                        Toast.makeText(getApplicationContext(), "No Complaint Selected.", Toast.LENGTH_LONG).show();;
+                                    }
+                                    else{
+                                        adapter.remove(adapter.getItem(highlightedPosition));
+                                    }
+                                }
+                            });
+
                         }
                     }
                 }

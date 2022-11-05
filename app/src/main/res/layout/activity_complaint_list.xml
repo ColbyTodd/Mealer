@@ -27,6 +27,8 @@
 
         <ListView
             android:id="@+id/complaintList"
+            android:choiceMode="singleChoice"
+            android:listSelector="@android:color/darker_gray"
             android:layout_width="match_parent"
             android:layout_height="474dp">
 
@@ -37,6 +39,11 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
             <Button
                 android:id="@+id/deleteComplaint"
                 android:layout_width="wrap_content"
@@ -45,6 +52,11 @@
                 android:backgroundTint="#EC1B24"
                 android:text="Delete Complaint" />
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
             <Button
                 android:id="@+id/suspend"
                 android:layout_width="wrap_content"
@@ -52,6 +64,11 @@
                 android:layout_weight="1"
                 android:backgroundTint="#EC1B24"
                 android:text="Suspend Cook" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
