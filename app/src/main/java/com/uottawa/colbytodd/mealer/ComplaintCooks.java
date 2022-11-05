@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -71,17 +72,17 @@ public class ComplaintCooks extends AppCompatActivity {
     public void onSearchClick(View view){
         EditText cook = (EditText) findViewById(R.id.search);
         ListView cooksList = findViewById(R.id.cooksList);
-        /*String top, bot = cook.getText().toString();
+        String top, bot = cook.getText().toString();
         int len = bot.length();
         //Creates query parameters
         String allButLast = bot.substring(0, len - 1);
-        top = allButLast + (char) (bot.charAt(len - 1) + 1);*/
+        top = allButLast + (char) (bot.charAt(len - 1) + 1);
 
 
         db.collection("complaints")
-                //.whereGreaterThanOrEqualTo("Document ID", bot)
-                //.whereLessThan("Document ID", top)
-                .whereEqualTo("Document ID", cook.getText())
+                .whereGreaterThanOrEqualTo(FieldPath.documentId(), bot)
+                .whereLessThan(FieldPath.documentId(), top)
+                //.whereEqualTo(FieldPath.documentId(), "A@gmail.com")
                 .limit(10)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -101,13 +102,6 @@ public class ComplaintCooks extends AppCompatActivity {
                             //Shows the list of cooks with complaints on the app
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.cook_lists, documents);
                             cooksList.setAdapter(adapter);
-                            cooksList.setOnItemClickListener(new OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    Intent intent = new Intent(getApplicationContext(), ComplaintList.class);
-                                    startActivity(intent);
-                                }
-                            });
                         }
                     }
                 });
