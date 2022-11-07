@@ -34,6 +34,17 @@
 
         </ListView>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="34dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/suspensionDate"
+            android:textColor="#000"
+            android:textSize="24sp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -50,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#EC1B24"
+                android:onClick="deleteComplaint"
                 android:text="Delete Complaint" />
 
             <Space
@@ -59,7 +71,7 @@
 
             <Button
                 android:id="@+id/suspend"
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#EC1B24"
@@ -68,7 +80,8 @@
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:text="Suspend Cook"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
