@@ -23,11 +23,15 @@ public class RegisterCook2 extends AppCompatActivity {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference mDocRef;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_cook2);
+
+        Intent intent = getIntent();
+        email = intent.getStringExtra("EMAIL");
 
         //Add back button
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -72,8 +76,9 @@ public class RegisterCook2 extends AppCompatActivity {
         user.put("description", description);
 
         //mDocRef.set(user);
-
-        startActivity(new Intent(this, CookWelcome.class));
+        Intent intent = new Intent(this, CookWelcome.class);
+        intent.putExtra("EMAIL", email);
+        startActivity(intent);
     }
 
 }

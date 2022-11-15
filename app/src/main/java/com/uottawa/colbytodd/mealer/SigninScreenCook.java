@@ -46,7 +46,7 @@ public class SigninScreenCook extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void validateUser(DocumentSnapshot doc, String password, TextView message){
+    private void validateUser(DocumentSnapshot doc, String password, TextView message, String email){
         Map<String, Object> signedUser = doc.getData();
         Object passDB = null;
         Timestamp suspension = null;
@@ -63,7 +63,11 @@ public class SigninScreenCook extends AppCompatActivity {
             message.setText("Your account is currently suspended, you will regain access to your account on: " + suspension.toDate());
         }
         else if(!Objects.equals(passDB, password)) message.setText("Password is incorrect");
-        else startActivity(new Intent(this, CookWelcome.class));
+        else {
+            Intent intent = new Intent(this, CookWelcome.class);
+            intent.putExtra("EMAIL", email);
+            startActivity(intent);
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -72,7 +76,7 @@ public class SigninScreenCook extends AppCompatActivity {
         mDocRef.get().addOnCompleteListener(task -> {
             if (task.getResult().exists()) {
                 DocumentSnapshot document = task.getResult();
-                validateUser(document, password, message);
+                validateUser(document, password, message, email);
             } else {
                 message.setText("Email does not exist");
             }

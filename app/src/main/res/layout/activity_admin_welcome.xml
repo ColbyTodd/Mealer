@@ -44,7 +44,7 @@
             android:layout_height="67dp" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/welcome"
             android:layout_width="273dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

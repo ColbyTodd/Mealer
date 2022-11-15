@@ -35,18 +35,31 @@
             android:layout_height="67dp" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/welcome"
             android:layout_width="273dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:shadowColor="#ED1B24"
-            android:text="You are logged in as Cook"
+            android:text="You are logged in as cook"
             android:textColor="#EC1B24" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="204dp" />
+            android:layout_height="98dp" />
+
+        <Button
+            android:id="@+id/viewMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="#EC1B24"
+            android:onClick="onViewMenuClick"
+            android:text="View Menu" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="98dp" />
 
         <Button
             android:id="@+id/LogOff"

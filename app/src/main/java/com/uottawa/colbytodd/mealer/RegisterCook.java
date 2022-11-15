@@ -60,7 +60,9 @@ public class RegisterCook extends AppCompatActivity {
 
         mDocRef.set(user);
 
-        startActivity(new Intent(this, RegisterCook2.class));
+        Intent intent = new Intent(this, RegisterCook2.class);
+        intent.putExtra("EMAIL", email);
+        startActivity(intent);
     }
     public void openCookRegistration2(View v){
         EditText first = findViewById(R.id.firstName2);
