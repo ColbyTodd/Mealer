@@ -7,4 +7,4 @@ Colby Todd #300241178
 Zakaria Abdisalam #300229406  (online section)
 Mahenth Sivaruban #300194748
 
-Administrator account email: mealeradmin@gmail.com password: secure123Password!
+Administrator account email: admin password: admin

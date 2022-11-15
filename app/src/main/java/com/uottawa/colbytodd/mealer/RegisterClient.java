@@ -4,6 +4,7 @@ import static java.lang.Character.isDigit;
 import static java.lang.Character.isLetter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
@@ -32,6 +33,21 @@ public class RegisterClient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_client);
+
+        //Add back button
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if(id == android.R.id.home){
+            //Ends the activity
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
         /*focus = findViewById(R.id.focus);
         firstName = findViewById(R.id.firstName);
