@@ -53,7 +53,7 @@ public class menuListActivity extends AppCompatActivity {
                 }
 
                 //Shows the list of cooks with complaints on the app
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.cook_lists, documents);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.menu_list, documents);
                 menuList.setAdapter(adapter);
             }
         }
@@ -62,6 +62,7 @@ public class menuListActivity extends AppCompatActivity {
     //Add back button
     getSupportActionBar().setDisplayShowHomeEnabled(true);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 }
 
     @Override
