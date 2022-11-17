@@ -6,8 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AddMeal2 extends AppCompatActivity {
+
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private DocumentReference mDocRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,24 @@ public class AddMeal2 extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void goToAddMeal3(View view){
-        startActivity(new Intent(this, AddMeal3.class));
+        TextView t = findViewById(R.id.AddMealFeedback2);
+        if(verifyFields())
+            startActivity(new Intent(this, AddMeal3.class));
+        else
+            t.setText("Fields Cannot be Empty");
+    }
+
+    private boolean verifyFields(){
+        EditText ingredients = (EditText) findViewById(R.id.ingredients);
+        EditText allergens = (EditText) findViewById(R.id.allergens);
+
+        String sIngredients = ingredients.getText().toString();
+        String sAllergens =  allergens.getText().toString();
+
+        if(sIngredients.length()!=0 && sAllergens.length()!=0)
+            return true;
+        else
+            return false;
+
     }
 }

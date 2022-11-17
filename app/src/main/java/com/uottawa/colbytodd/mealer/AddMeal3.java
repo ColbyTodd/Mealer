@@ -6,8 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AddMeal3 extends AppCompatActivity {
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private DocumentReference mDocRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,24 @@ public class AddMeal3 extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void goToMenuList(View view){
-        startActivity(new Intent(this, CookWelcome.class));
+        TextView t = findViewById(R.id.AddMealFeedback3);
+        if(verifyFields())
+            startActivity(new Intent(this, CookWelcome.class));
+        else
+            t.setText("Fields Cannot be Empty");
+    }
+
+    private boolean verifyFields(){
+        EditText price = (EditText) findViewById(R.id.price);
+        EditText description = (EditText) findViewById(R.id.mealDescription);
+
+        String sPrice = price.getText().toString();
+        String sDescription =  description.getText().toString();
+
+        if(sPrice.length()!=0 && sDescription.length()!=0)
+            return true;
+        else
+            return false;
+
     }
 }
