@@ -35,8 +35,8 @@ public class menuListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String email = intent.getStringExtra("EMAIL");
 
-    //Querys the database for complaints
-        db.collection("cooks").document(email).collection("menu")
+    //Querys the database for meals
+        db.collection("meals").document(email).collection("meals")
                 .limit(10)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -49,7 +49,7 @@ public class menuListActivity extends AppCompatActivity {
                 }
 
                 if(documents.size() == 0){
-                    documents.add("There are currently no cooks with complaints.");
+                    documents.add("There are currently no meals added");
                 }
 
                 //Shows the list of cooks with complaints on the app
@@ -62,9 +62,7 @@ public class menuListActivity extends AppCompatActivity {
     //Add back button
     getSupportActionBar().setDisplayShowHomeEnabled(true);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -74,5 +72,8 @@ public class menuListActivity extends AppCompatActivity {
             this.finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void goToAddMeal(View view){
+        startActivity(new Intent(this, AddMeal.class));
     }
 }
