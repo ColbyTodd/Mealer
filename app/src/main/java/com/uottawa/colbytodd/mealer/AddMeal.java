@@ -30,7 +30,7 @@ public class AddMeal extends AppCompatActivity {
 
         if(id == android.R.id.home){
             //Ends the activity
-            this.finish(); //try this?
+            this.finish();
         }
         return super.onOptionsItemSelected(item);
     }
