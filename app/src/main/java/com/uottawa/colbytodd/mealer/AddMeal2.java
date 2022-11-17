@@ -9,13 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 public class AddMeal2 extends AppCompatActivity {
-
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference mDocRef;
+    String sIngredients;
+    String sAllergens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +33,15 @@ public class AddMeal2 extends AppCompatActivity {
     }
     public void goToAddMeal3(View view){
         TextView t = findViewById(R.id.AddMealFeedback2);
-        if(verifyFields())
-            startActivity(new Intent(this, AddMeal3.class));
+        Intent i = new Intent(this, AddMeal3.class);
+        Bundle extras = getIntent().getExtras();
+        if(verifyFields()){
+            i.putExtra("ingredients", sIngredients);
+            i.putExtra("allergens", sAllergens);
+            i.putExtra("mealName",extras.getString("mealName"));
+            i.putExtra("mealType",extras.getString("mealType"));
+            i.putExtra("cuisineType",extras.getString("cuisineType"));
+            startActivity(i);}
         else
             t.setText("Fields Cannot be Empty");
     }
@@ -47,8 +50,8 @@ public class AddMeal2 extends AppCompatActivity {
         EditText ingredients = (EditText) findViewById(R.id.ingredients);
         EditText allergens = (EditText) findViewById(R.id.allergens);
 
-        String sIngredients = ingredients.getText().toString();
-        String sAllergens =  allergens.getText().toString();
+        sIngredients = ingredients.getText().toString();
+        sAllergens =  allergens.getText().toString();
 
         if(sIngredients.length()!=0 && sAllergens.length()!=0)
             return true;

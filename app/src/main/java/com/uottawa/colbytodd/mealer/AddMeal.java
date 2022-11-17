@@ -9,16 +9,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 public class AddMeal extends AppCompatActivity {
 
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference mDocRef;
+    String sMealName;
+    String sMealType;
+    String sCuisineType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meal);
         //Add back button
@@ -31,14 +30,18 @@ public class AddMeal extends AppCompatActivity {
 
         if(id == android.R.id.home){
             //Ends the activity
-            this.finish();
+            this.finish(); //try this?
         }
         return super.onOptionsItemSelected(item);
     }
     public void goToAddMeal2(View view){
         TextView t = findViewById(R.id.AddMealFeedback);
-        if(verifyFields())
-            startActivity(new Intent(this, AddMeal2.class));
+        Intent i = new Intent(this, AddMeal2.class);
+        if(verifyFields()){
+            i.putExtra("mealName", sMealName);
+            i.putExtra("mealType", sMealType);
+            i.putExtra("cuisineType", sCuisineType);
+            startActivity(i);}
         else
             t.setText("Fields Cannot be Empty");
     }
@@ -48,9 +51,9 @@ public class AddMeal extends AppCompatActivity {
         EditText mealType = (EditText) findViewById(R.id.mealType);
         EditText cuisineType = (EditText) findViewById(R.id.cuisineType);
 
-        String sMealName = mealName.getText().toString();
-        String sMealType =  mealType.getText().toString();
-        String sCuisineType = cuisineType.getText().toString();
+        sMealName = mealName.getText().toString();
+        sMealType =  mealType.getText().toString();
+        sCuisineType = cuisineType.getText().toString();
 
         if(sMealName.length()!=0 && sMealType.length()!=0 && sCuisineType.length()!=0)
             return true;
