@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -48,6 +49,17 @@ public class menuListAdapter extends ArrayAdapter {
 
         viewHolder.docId.setText(data.getDocumentId());
         viewHolder.chk.setChecked(data.getChecked());
+
+        viewHolder.chk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(((CompoundButton) view).isChecked()){
+                    System.out.println("Checked");
+                } else {
+                    System.out.println("Un-Checked");
+                }
+            }
+        });
 
         return view;
 
