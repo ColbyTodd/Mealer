@@ -12,32 +12,58 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class menuListAdapter extends ArrayAdapter {
-    String[] documents;
-    Boolean[] isChecked;
-    private Context context;
+    private LayoutInflater inflater;
 
-    public menuListAdapter(Context context, List<String> documents, List<Boolean> checked) {
-        super(context, R.layout.menu_list, documents);
-
-        this.documents = new String[documents.size()];
-        this.documents = documents.toArray(this.documents);
-        this.isChecked = new Boolean[checked.size()];
-        this.isChecked = checked.toArray(this.isChecked);
+    public menuListAdapter (Context context, List<menuList> data){
+        super(context, 0, data);
+        inflater = LayoutInflater.from(context);
     }
+
+    /*
+    @Override
+    public long getItemId(int position)
+    {
+        //It is just an example
+        menuList data = (menuList) getItem(position);
+        return data.ID;
+    }*/
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater siteInflater = LayoutInflater.from(getContext());
-        View customView = siteInflater.inflate(R.layout.menu_list, parent, false);
+    public View getView(int position, View view, ViewGroup parent)
+    {
+        ViewHolder viewHolder;
+        if (view == null) {
+            view = inflater.inflate(R.layout.menu_list_test, null);
+            // Do some initialization
 
-        TextView observationTV = (TextView) customView.findViewById(R.id.obs);
-        CheckBox checkCB = (CheckBox) customView.findViewById(R.id.chkbx);
+            //Retrieve the view on the item layout and set the value.
+            viewHolder = new ViewHolder(view);
+            view.setTag(viewHolder);
+        }
+        else {
+            viewHolder = (ViewHolder) view.getTag();
+        }
 
-        checkCB.setTag(Integer.valueOf(position));
+        //Retrieve your object
+        menuList data = (menuList) getItem(position);
 
-        observationTV.setText(documents[position]);
-        checkCB.setChecked(isChecked[position]);
+        viewHolder.docId.setText(data.getDocumentId());
+        viewHolder.chk.setChecked(data.getChecked());
 
-        return customView;
+        return view;
+
+    }
+
+    private class ViewHolder
+    {
+        private final TextView docId;
+        private final CheckBox chk;
+
+        private ViewHolder(View view)
+        {
+            docId = (TextView) view.findViewById(R.id.docId);
+            chk = (CheckBox) view.findViewById(R.id.chkbx);
+        }
     }
 }
+

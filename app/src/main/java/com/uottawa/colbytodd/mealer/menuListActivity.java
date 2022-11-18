@@ -25,8 +25,8 @@ import java.util.List;
 public class menuListActivity extends AppCompatActivity {
     //List<DocumentSnapshot> myListOfDocuments;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    List<String> documents = new ArrayList<String>();
-    List<Boolean> isChecked = new ArrayList<Boolean>();
+    List<menuList> documents = new ArrayList<menuList>();
+
     String email;
 
     @Override
@@ -67,27 +67,13 @@ public class menuListActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //adds cooks with complaints to a list
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                documents.add(document.getId());
+                                documents.add(new menuList(document.getId(), (Boolean) document.get("isOffered")));
 
-                                /*
-                                db.collection("cooks")
-                                        .document(email)
-                                        .collection("menu")
-                                        .document(document.getId())
-                                        .get()
-                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                if (task.isSuccessful()) {
-                                                    isChecked.add((Boolean) task.getResult().get("isOffered"));
-                                                }
-                                            }
-
-                                        });*/
                             }
 
                             //Shows the list of cooks with complaints on the app
-                            ArrayAdapter<String> adapter = new ArrayAdapter(getApplicationContext(), R.layout.menu_list, documents);
+                            //ArrayAdapter<String> adapter = new ArrayAdapter(getApplicationContext(), R.layout.menu_list, documents);
+                            ArrayAdapter<menuList> adapter = new menuListAdapter(getApplicationContext(), documents);
                             menuList.setAdapter(adapter);
                         }
                     }
