@@ -39,7 +39,7 @@ public class ComplaintCooks extends AppCompatActivity {
 
         //Querys the database for complaints
         db.collection("complaints")
-                .limit(10)
+                //.limit(10)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
