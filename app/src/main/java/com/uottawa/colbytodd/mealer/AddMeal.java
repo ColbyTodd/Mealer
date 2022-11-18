@@ -14,12 +14,14 @@ public class AddMeal extends AppCompatActivity {
     String sMealName;
     String sMealType;
     String sCuisineType;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meal);
+        email = getIntent().getStringExtra("EMAIL");
         //Add back button
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,6 +43,7 @@ public class AddMeal extends AppCompatActivity {
             i.putExtra("mealName", sMealName);
             i.putExtra("mealType", sMealType);
             i.putExtra("cuisineType", sCuisineType);
+            i.putExtra("EMAIL", email);
             startActivity(i);}
         else
             t.setText("Fields Cannot be Empty");

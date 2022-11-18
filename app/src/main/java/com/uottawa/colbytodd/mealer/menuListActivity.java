@@ -24,6 +24,7 @@ public class menuListActivity extends AppCompatActivity {
     //List<DocumentSnapshot> myListOfDocuments;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<String> documents = new ArrayList<String>();
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +34,11 @@ public class menuListActivity extends AppCompatActivity {
         ListView menuList = findViewById(R.id.menuList);
 
         Intent intent = getIntent();
-        String email = intent.getStringExtra("EMAIL");
+        email = intent.getStringExtra("EMAIL");
 
     //Querys the database for meals
         // Something from this point to the end of the onComplete is stopping this page from being loaded twice -Geoff
-        db.collection("meals").document(email).collection("meals")
+        db.collection("cooks").document(email).collection("menu")
                 .limit(10)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -48,9 +49,10 @@ public class menuListActivity extends AppCompatActivity {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     documents.add(document.getId());
                 }
+                /*
                 if(documents.size() == 0){
                     documents.add("There are currently no meals added");
-                }
+                }*/
                 //Shows the list of cooks with complaints on the app
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.menu_list, documents);
                 menuList.setAdapter(adapter);
@@ -73,6 +75,8 @@ public class menuListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void goToAddMeal(View view){
-        startActivity(new Intent(this, AddMeal.class));
+        Intent intent = new Intent(this, AddMeal.class);
+        intent.putExtra("EMAIL", email);
+        startActivity(intent);
     }
 }

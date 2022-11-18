@@ -21,11 +21,13 @@ public class AddMeal3 extends AppCompatActivity {
 
     String sPrice;
     String sDescription;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meal3);
+        email = getIntent().getStringExtra("EMAIL");
         //Add back button
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -43,7 +45,7 @@ public class AddMeal3 extends AppCompatActivity {
     public void goToMenuList(View view){
         TextView t = findViewById(R.id.AddMealFeedback3);
         Bundle extras = getIntent().getExtras();
-        mDocRef = db.document("meals/" + extras.getString("mealName"));
+        mDocRef = db.document("cooks/" + email + "/menu/" + extras.getString("mealName"));
         Map<String, Object> meal = new HashMap<String, Object>();
         if(verifyFields()){
             meal.put("Price",sPrice);
@@ -55,7 +57,9 @@ public class AddMeal3 extends AppCompatActivity {
             meal.put("Allergens",extras.getString("allergens"));
             mDocRef.set(meal);
 
-            startActivity(new Intent(this, CookWelcome.class));}
+            Intent intent = new Intent(this, CookWelcome.class);
+            intent.putExtra("EMAIL", email);
+            startActivity(intent);}
         else
             t.setText("Fields Cannot be Empty");
     }

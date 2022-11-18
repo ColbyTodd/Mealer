@@ -12,11 +12,13 @@ import android.widget.TextView;
 public class AddMeal2 extends AppCompatActivity {
     String sIngredients;
     String sAllergens;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meal2);
+        email = getIntent().getStringExtra("EMAIL");
         //Add back button
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,6 +43,7 @@ public class AddMeal2 extends AppCompatActivity {
             i.putExtra("mealName",extras.getString("mealName"));
             i.putExtra("mealType",extras.getString("mealType"));
             i.putExtra("cuisineType",extras.getString("cuisineType"));
+            i.putExtra("EMAIL", email);
             startActivity(i);}
         else
             t.setText("Fields Cannot be Empty");
