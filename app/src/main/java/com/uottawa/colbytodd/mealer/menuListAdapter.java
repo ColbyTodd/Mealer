@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class menuListAdapter extends ArrayAdapter {
@@ -33,7 +32,7 @@ public class menuListAdapter extends ArrayAdapter {
     {
         ViewHolder viewHolder;
         if (view == null) {
-            view = inflater.inflate(R.layout.menu_list_test, null);
+            view = inflater.inflate(R.layout.menu_list, null);
             // Do some initialization
 
             //Retrieve the view on the item layout and set the value.

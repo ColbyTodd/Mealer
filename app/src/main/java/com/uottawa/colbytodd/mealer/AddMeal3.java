@@ -55,6 +55,7 @@ public class AddMeal3 extends AppCompatActivity {
             meal.put("Description", sDescription);
             meal.put("Cuisine Type",extras.getString("cuisineType"));
             meal.put("Allergens",extras.getString("allergens"));
+            meal.put("isOffered", false);
             mDocRef.set(meal);
 
             Intent intent = new Intent(this, menuListActivity.class);
