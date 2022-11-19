@@ -3,6 +3,7 @@ package com.uottawa.colbytodd.mealer;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,9 @@ public class menuListAdapter extends ArrayAdapter {
         menuList data = (menuList) getItem(position);
         viewHolder.docId.setText(data.getDocumentId());
         viewHolder.chk.setChecked(data.getChecked());
+        if(data.getChecked()==false){
+            viewHolder.docId.setTextColor(Color.LTGRAY);
+        }
 
         mDocRef = db.document("cooks/" + data.getEmail() + "/menu/" + data.getDocumentId());
 
@@ -68,9 +72,11 @@ public class menuListAdapter extends ArrayAdapter {
                 if(((CompoundButton) view).isChecked()){
                     mDocRef.update("isOffered",true);
                     Toast.makeText(getContext(), "Meal \"" + data.getDocumentId()+ "\" Has Been Added to the Offered List", Toast.LENGTH_SHORT).show();
+                    viewHolder.docId.setTextColor(Color.BLACK);
                 } else {
                     mDocRef.update("isOffered",false);
                     Toast.makeText(getContext(), "Meal \"" + data.getDocumentId()+ "\" Has Been Removed from the Offered List", Toast.LENGTH_SHORT).show();
+                    viewHolder.docId.setTextColor(Color.LTGRAY);
                 }
             }
         });
