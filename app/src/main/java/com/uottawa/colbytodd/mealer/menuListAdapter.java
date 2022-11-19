@@ -9,7 +9,12 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class menuListAdapter extends ArrayAdapter {
     private LayoutInflater inflater;
@@ -31,6 +36,9 @@ public class menuListAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent)
     {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference mDocRef;
+
         ViewHolder viewHolder;
         if (view == null) {
             view = inflater.inflate(R.layout.menu_list, null);
@@ -46,17 +54,18 @@ public class menuListAdapter extends ArrayAdapter {
 
         //Retrieve your object
         menuList data = (menuList) getItem(position);
-
         viewHolder.docId.setText(data.getDocumentId());
         viewHolder.chk.setChecked(data.getChecked());
+
+        mDocRef = db.document("cooks/" + data.getEmail() + "/menu/" + data.getDocumentId());
 
         viewHolder.chk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(((CompoundButton) view).isChecked()){
-                    System.out.println("Checked");
+                    mDocRef.update("isOffered",true);
                 } else {
-                    System.out.println("Un-Checked");
+                    mDocRef.update("isOffered",false);
                 }
             }
         });
