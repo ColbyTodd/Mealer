@@ -1,6 +1,8 @@
 package com.uottawa.colbytodd.mealer;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -64,8 +67,10 @@ public class menuListAdapter extends ArrayAdapter {
             public void onClick(View view) {
                 if(((CompoundButton) view).isChecked()){
                     mDocRef.update("isOffered",true);
+                    Toast.makeText(getContext(), "Meal \"" + data.getDocumentId()+ "\" Has Been Added to the Offered List", Toast.LENGTH_SHORT).show();
                 } else {
                     mDocRef.update("isOffered",false);
+                    Toast.makeText(getContext(), "Meal \"" + data.getDocumentId()+ "\" Has Been Removed from the Offered List", Toast.LENGTH_SHORT).show();
                 }
             }
         });
