@@ -4,14 +4,20 @@ public class menuList {
 
     private String documentId;
     private Boolean isChecked;
+    private String email;
 
-    public menuList(String documentID, Boolean isChecked){
+    public menuList(String documentID, Boolean isChecked, String email){
         this.documentId = documentID;
         this.isChecked = isChecked;
+        this.email = email;
     }
 
     public String getDocumentId() {
         return documentId;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public Boolean getChecked() {

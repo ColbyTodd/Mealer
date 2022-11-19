@@ -73,7 +73,7 @@ public class menuListActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //adds cooks with complaints to a list
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                documents.add(new menuList(document.getId(), (Boolean) document.get("isOffered")));
+                                documents.add(new menuList(document.getId(), (Boolean) document.get("isOffered"), email));
 
                             }
 
