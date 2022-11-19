@@ -9,9 +9,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldPath;
@@ -26,13 +30,15 @@ public class menuListActivity extends AppCompatActivity {
     //List<DocumentSnapshot> myListOfDocuments;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<menuList> documents = new ArrayList<menuList>();
-
+    int highlightedMenuItemPosition = -1;
+    Button goToRemoveMeal;
     String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_list);
+         goToRemoveMeal = (Button) findViewById(R.id.removeMealButton);
 
         Intent intent = getIntent();
         email = intent.getStringExtra("EMAIL");
@@ -75,6 +81,37 @@ public class menuListActivity extends AppCompatActivity {
                             //ArrayAdapter<String> adapter = new ArrayAdapter(getApplicationContext(), R.layout.menu_list, documents);
                             ArrayAdapter<menuList> adapter = new menuListAdapter(getApplicationContext(), documents);
                             menuList.setAdapter(adapter);
+                            menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                                    highlightedMenuItemPosition=position;
+                                }
+                            });
+                            goToRemoveMeal.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    if (highlightedMenuItemPosition==-1){
+                                        Toast.makeText(getApplicationContext(), "No Meal Selected.", Toast.LENGTH_LONG).show();
+                                    }
+                                    else{
+                                        db.collection("cooks").document(email).collection("menu").document(adapter.getItem(highlightedMenuItemPosition).getDocumentId())
+                                                .delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Toast.makeText(getApplicationContext(), adapter.getItem(highlightedMenuItemPosition).getDocumentId() + " was removed", Toast.LENGTH_LONG).show();
+                                                        adapter.remove(adapter.getItem(highlightedMenuItemPosition));
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(getApplicationContext(), "Server Side error", Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
+                                    }
+                                }
+                            });
                         }
                     }
                 });

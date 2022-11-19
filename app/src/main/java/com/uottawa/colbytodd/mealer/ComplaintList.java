@@ -58,7 +58,6 @@ public class ComplaintList extends AppCompatActivity implements DatePickerDialog
         Button deleteComplaint = (Button) findViewById(R.id.deleteComplaint);
         extras = getIntent().getExtras();
         dateText = findViewById(R.id.suspensionDate);
-        complaintList = (ListView) findViewById(R.id.complaintList);
         findViewById(R.id.suspend).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
