@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -42,11 +43,13 @@ import java.util.concurrent.TimeUnit;
 
 public class ComplaintList extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     List<String> documents = new ArrayList<String>();
+    List<String> documentIds = new ArrayList<String>();
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     int highlightedPosition = -1;
     Bundle extras;
     TextView dateText;
     ListView complaintList;
+    TextView text;
     int hour, minute, year, month, dayOfMonth;
 
     @Override
@@ -55,6 +58,7 @@ public class ComplaintList extends AppCompatActivity implements DatePickerDialog
         setContentView(R.layout.activity_complaint_list);
         extras = getIntent().getExtras();
         complaintList = (ListView) findViewById(R.id.complaintList);
+        text = findViewById(R.id.textView3);
         Button deleteComplaint = (Button) findViewById(R.id.deleteComplaint);
         extras = getIntent().getExtras();
         dateText = findViewById(R.id.suspensionDate);
@@ -74,15 +78,20 @@ public class ComplaintList extends AppCompatActivity implements DatePickerDialog
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             List<String> complaints = new ArrayList<>();
+                            List<String> complaintIds = new ArrayList<>();
 
                             Map<String, Object> map = document.getData();
                             if (map != null) {
                                 for (Map.Entry<String, Object> entry : map.entrySet()) {
                                     complaints.add(entry.getValue().toString());
+                                    complaintIds.add(entry.getKey());
                                 }
                             }
                             for (String s : complaints) {
                                 documents.add(s);
+                            }
+                            for(String s: complaintIds){
+                                documentIds.add(s);
                             }
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.cook_lists, documents);
                             complaintList.setAdapter(adapter);
@@ -96,10 +105,13 @@ public class ComplaintList extends AppCompatActivity implements DatePickerDialog
                                 @Override
                                 public void onClick(View view) {
                                     if (highlightedPosition==-1){
-                                        Toast.makeText(getApplicationContext(), "No Complaint Selected.", Toast.LENGTH_LONG).show();;
+                                        Toast.makeText(getApplicationContext(), "No Complaint Selected", Toast.LENGTH_LONG).show();
                                     }
                                     else{
                                         adapter.remove(adapter.getItem(highlightedPosition));
+                                        db.collection("complaints").document(email).update(documentIds.get(highlightedPosition), FieldValue.delete());
+                                        highlightedPosition=-1;
+                                        Toast.makeText(getApplicationContext(), "Complaint Deleted", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
