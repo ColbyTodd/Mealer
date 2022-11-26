@@ -18,4 +18,8 @@ public class ClientWelcome extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
     }
 
+    public void goToSeachMeals(View v){
+        startActivity(new Intent(this, clientMealList.class));
+    }
+
 }
