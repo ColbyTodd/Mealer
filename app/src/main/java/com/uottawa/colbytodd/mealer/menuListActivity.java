@@ -55,7 +55,9 @@ public class menuListActivity extends AppCompatActivity {
 
         if(id == android.R.id.home){
             //Ends the activity
-            this.finish();
+            Intent intent = new Intent(this, CookWelcome.class);
+            intent.putExtra("EMAIL", email);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
