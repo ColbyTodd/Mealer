@@ -36,6 +36,7 @@ public class Meal {
     public void setCuisineType(String cuisineType) {
         this.cuisineType = cuisineType;
     }
+
     public String getPrice() {
         return price;
     }

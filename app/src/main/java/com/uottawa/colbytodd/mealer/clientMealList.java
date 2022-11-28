@@ -54,7 +54,7 @@ public class clientMealList extends AppCompatActivity {
                     List<String> mealType = new ArrayList<>();
                     List<String> name = new ArrayList<>();
                     List<String> price = new ArrayList<>();
-                    List<Boolean> isOffered = new ArrayList<>();
+                    List<String> isOffered = new ArrayList<>();
 
                     documents = document.getDocuments();
                     for(DocumentSnapshot s : documents){
@@ -84,7 +84,7 @@ public class clientMealList extends AppCompatActivity {
                                 price.add(entry.getValue().toString());
                             }
                             else if(i==0){
-                                isOffered.add((boolean) entry.getValue());
+                                isOffered.add(entry.getValue().toString());
                             }
                             i++;
                         }
