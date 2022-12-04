@@ -223,6 +223,7 @@
             <Space
                 android:layout_width="340dp"
                 android:layout_height="20dp"
+                android:layout_gravity="center"
                 android:layout_weight="0.001" />
 
             <TextView

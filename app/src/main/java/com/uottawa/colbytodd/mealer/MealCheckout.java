@@ -2,6 +2,7 @@ package com.uottawa.colbytodd.mealer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class MealCheckout extends AppCompatActivity {
@@ -47,5 +48,16 @@ public class MealCheckout extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if(id == android.R.id.home){
+            //Ends the activity
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
