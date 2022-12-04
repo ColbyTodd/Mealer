@@ -3,9 +3,12 @@ package com.uottawa.colbytodd.mealer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,6 +29,7 @@ import java.util.Map;
 
 public class clientMealList extends AppCompatActivity {
 
+    Bundle extras;
     private static final String TAG = "clientMealList";
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<DocumentSnapshot> documents = new ArrayList<>();
@@ -33,6 +37,8 @@ public class clientMealList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        extras = getIntent().getExtras();
+        String email = extras.getString("email");
         setContentView(R.layout.activity_client_meal_list);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -95,6 +101,21 @@ public class clientMealList extends AppCompatActivity {
                     }
                     MealListAdapter adapter = new MealListAdapter(getApplicationContext(), R.layout.client_meal_adapter_layout, mealList);
                     mealView.setAdapter(adapter);
+                    mealView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                            Intent i = new Intent(clientMealList.this, MealDescription.class);
+                            i.putExtra("Meal", name.get(position));
+                            i.putExtra("Type", mealType.get(position));
+                            i.putExtra("Description", description.get(position));
+                            i.putExtra("Ingredients", ingredients.get(position));
+                            i.putExtra("Price", price.get(position));
+                            i.putExtra("Cuisine Type", cuisineType.get(position));
+                            i.putExtra("Allergens", allergens.get(position));
+                            i.putExtra("email", email);
+                            startActivity(i);
+                        }
+                    });
                 }
             }
         });

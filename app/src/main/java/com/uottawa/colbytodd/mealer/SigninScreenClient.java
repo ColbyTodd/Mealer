@@ -53,7 +53,7 @@ public class SigninScreenClient extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void validateUser(DocumentSnapshot doc, String password, TextView message){
+    private void validateUser(String email, DocumentSnapshot doc, String password, TextView message){
             Map<String, Object> signedUser = doc.getData();
             assert signedUser != null;
             for (Map.Entry<String, Object> entry : signedUser.entrySet()) {
@@ -61,7 +61,9 @@ public class SigninScreenClient extends AppCompatActivity {
                 Object value = entry.getValue();
                 if (Objects.equals(key, "password")) {
                     if (Objects.equals(value, password)) {
-                        startActivity(new Intent(this, ClientWelcome.class));
+                        Intent i = new Intent(this, ClientWelcome.class);
+                        i.putExtra("email", email);
+                        startActivity(i);
                     } else {
                         message.setText("Password is incorrect");
                     }
@@ -74,7 +76,7 @@ public class SigninScreenClient extends AppCompatActivity {
         mDocRef.get().addOnCompleteListener(task -> {
             if (task.getResult().exists()) {
                 DocumentSnapshot document = task.getResult();
-                validateUser(document, password, message);
+                validateUser(email, document, password, message);
             } else {
                 message.setText("Input Error");
             }
