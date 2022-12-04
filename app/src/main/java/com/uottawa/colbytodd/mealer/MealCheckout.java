@@ -1,13 +1,24 @@
 package com.uottawa.colbytodd.mealer;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MealCheckout extends AppCompatActivity {
     Bundle extras;
     String email, address, card, cvv, expiration, first, last, meal, price;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private DocumentReference mDocRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +56,18 @@ public class MealCheckout extends AppCompatActivity {
         expirationText.setText(expiration);
         mealText.setText(meal);
         priceText.setText("$" + price);
+
+        findViewById(R.id.orderConfirmBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDocRef = db.document("clients/" + email + "/purchases/" + meal);
+                Map<String, Object> purchase = new HashMap<String, Object>();
+                purchase.put("Meal", meal);
+                purchase.put("Rating", "");
+                mDocRef.set(purchase);
+                startActivity(new Intent(MealCheckout.this, ClientWelcome.class));
+            }
+        });
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
