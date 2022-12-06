@@ -24,6 +24,14 @@
             android:textColor="#EC1B24"
             android:textSize="20sp" />
 
+        <EditText
+            android:id="@+id/mealSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Search"
+            android:inputType="textPersonName" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="34dp" />
@@ -37,16 +45,31 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Space
-                android:layout_width="50dp"
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:onClick="onMealSearchClick"
+                android:text="Meal Type" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onNameSearchClick"
+                android:text="Name" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onCuisineSearchClick"
+                android:text="Cuisine Type" />
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

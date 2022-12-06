@@ -88,6 +88,10 @@ public class ComplaintCooks extends AppCompatActivity {
     public void onSearchClick(View view){
         EditText cook = (EditText) findViewById(R.id.search);
         ListView cooksList = findViewById(R.id.cooksList);
+
+        if(cook.getText().length() == 0){
+            return;
+        }
         String top, bot = cook.getText().toString();
         int len = bot.length();
         //Creates query parameters
