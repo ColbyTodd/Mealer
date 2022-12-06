@@ -67,7 +67,7 @@ public class clientPurchaseHistory extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //adds cooks with complaints to a list
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                documents.add(new PurchaseHistory(document.getId(), (String) document.get("Status")));
+                                documents.add(new PurchaseHistory(document.getId(), (String) document.get("Status"), (String) document.get("Cook")));
 
                             }
 
@@ -75,6 +75,15 @@ public class clientPurchaseHistory extends AppCompatActivity {
                             //ArrayAdapter<String> adapter = new ArrayAdapter(getApplicationContext(), R.layout.menu_list, documents);
                             ArrayAdapter<menuList> adapter = new PurchaseHistoryAdapter(getApplicationContext(), documents);
                             purchases.setAdapter(adapter);
+                            purchases.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                                    Intent i = new Intent(clientPurchaseHistory.this, FileComplaint.class);
+                                    i.putExtra("Email", email);
+                                    i.putExtra("Cook", documents.get(position).getCook());
+                                    startActivity(i);
+                                }
+                            });
                         }
                     }
                 });
