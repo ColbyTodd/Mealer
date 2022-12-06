@@ -64,7 +64,7 @@ public class MealCheckout extends AppCompatActivity {
                 mDocRef = db.document("clients/" + email + "/purchases/" + meal);
                 Map<String, Object> purchase = new HashMap<String, Object>();
                 purchase.put("Meal", meal);
-                purchase.put("Status", "");
+                purchase.put("Status", "Pending");
                 purchase.put("Cook", cookEmail); //figure out how to get the cook email here
                 mDocRef.set(purchase);
                 mDocRef = db.document("cooks/" + cookEmail + "/orders/" + meal);

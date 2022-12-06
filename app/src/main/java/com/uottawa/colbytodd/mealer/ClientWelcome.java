@@ -13,6 +13,7 @@ public class ClientWelcome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_welcome);
+
     }
     public void logOff(View v){
         startActivity(new Intent(this, MainActivity.class));
@@ -22,6 +23,14 @@ public class ClientWelcome extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String email = extras.getString("email");
         Intent i = new Intent(this, clientMealList.class);
+        i.putExtra("email", email);
+        startActivity(i);
+    }
+
+    public void goToPurchases(View v){
+        Bundle extras = getIntent().getExtras();
+        String email = extras.getString("email");
+        Intent i = new Intent(this, clientPurchaseHistory.class);
         i.putExtra("email", email);
         startActivity(i);
     }
