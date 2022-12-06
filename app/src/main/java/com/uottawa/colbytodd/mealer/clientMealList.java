@@ -65,39 +65,48 @@ public class clientMealList extends AppCompatActivity {
                     documents = document.getDocuments();
                     for(DocumentSnapshot s : documents){
                         Map<String, Object> map = s.getData();
-                        Log.d("TEST",map.values().toString());
                         int i = 0;
                         for (Map.Entry<String, Object> entry : map.entrySet()) {
-                            if(i==1){
+                            if(entry.getKey().equals("Allergens")){
                                 allergens.add(entry.getValue().toString());
+                                Log.d("TEST","1");
                             }
-                            else if(i==5) {
+                            else if(entry.getKey().equals("Cuisine Type")) {
                                 cuisineType.add(entry.getValue().toString());
+                                Log.d("TEST","2");
                             }
-                            else if(i==2) {
+                            else if(entry.getKey().equals("Description")) {
                                 description.add(entry.getValue().toString());
+                                Log.d("TEST","3");
                             }
-                            else if(i==4) {
+                            else if(entry.getKey().equals("Ingredients")) {
                                 ingredients.add(entry.getValue().toString());
+                                Log.d("TEST","4");
                             }
-                            else if(i==6) {
+                            else if(entry.getKey().equals("Meal Type")) {
                                 mealType.add(entry.getValue().toString());
+                                Log.d("TEST","5");
                             }
-                            else if(i==7) {
+                            else if(entry.getKey().equals("Name")){
                                 name.add(entry.getValue().toString());
+                                Log.d("TEST","6");
                             }
-                            else if(i==3) {
+                            else if(entry.getKey().equals("Price")) {
                                 price.add(entry.getValue().toString());
+                                Log.d("TEST","7");
                             }
-                            else if(i==0){
+                            else if(entry.getKey().equals("isOffered")){
                                 isOffered.add(entry.getValue().toString());
+                                Log.d("TEST","8");
                             }
                             i++;
                         }
                     }
                     for(int i=0;i<allergens.size();i++){
-                        Meal meal = new Meal(name.get(i),mealType.get(i),cuisineType.get(i),price.get(i));
-                        mealList.add(meal);
+                        if(isOffered.get(i)=="true") {
+                            Meal meal = new Meal(name.get(i), mealType.get(i), cuisineType.get(i), price.get(i));
+                            mealList.add(meal);
+                        }
                     }
                     MealListAdapter adapter = new MealListAdapter(getApplicationContext(), R.layout.client_meal_adapter_layout, mealList);
                     mealView.setAdapter(adapter);
