@@ -3,9 +3,12 @@ package com.uottawa.colbytodd.mealer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,6 +29,7 @@ import java.util.Map;
 
 public class clientMealList extends AppCompatActivity {
 
+    Bundle extras;
     private static final String TAG = "clientMealList";
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<DocumentSnapshot> documents = new ArrayList<>();
@@ -33,6 +37,8 @@ public class clientMealList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        extras = getIntent().getExtras();
+        String email = extras.getString("email");
         setContentView(R.layout.activity_client_meal_list);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -55,46 +61,79 @@ public class clientMealList extends AppCompatActivity {
                     List<String> name = new ArrayList<>();
                     List<String> price = new ArrayList<>();
                     List<String> isOffered = new ArrayList<>();
+                    List<String> cookEmail = new ArrayList<>();
 
                     documents = document.getDocuments();
                     for(DocumentSnapshot s : documents){
                         Map<String, Object> map = s.getData();
-                        Log.d("TEST",map.values().toString());
-                        int i = 0;
                         for (Map.Entry<String, Object> entry : map.entrySet()) {
-                            if(i==1){
+                            if(entry.getKey().equals("Allergens")){
                                 allergens.add(entry.getValue().toString());
                             }
-                            else if(i==5) {
+                            else if(entry.getKey().equals("Cuisine Type")) {
                                 cuisineType.add(entry.getValue().toString());
                             }
-                            else if(i==2) {
+                            else if(entry.getKey().equals("Description")) {
                                 description.add(entry.getValue().toString());
                             }
-                            else if(i==4) {
+                            else if(entry.getKey().equals("Ingredients")) {
                                 ingredients.add(entry.getValue().toString());
                             }
-                            else if(i==6) {
+                            else if(entry.getKey().equals("Meal Type")) {
                                 mealType.add(entry.getValue().toString());
                             }
-                            else if(i==7) {
+                            else if(entry.getKey().equals("Name")){
                                 name.add(entry.getValue().toString());
                             }
-                            else if(i==3) {
+                            else if(entry.getKey().equals("Price")) {
                                 price.add(entry.getValue().toString());
                             }
-                            else if(i==0){
+                            else if(entry.getKey().equals("isOffered")){
                                 isOffered.add(entry.getValue().toString());
                             }
-                            i++;
+                            else if(entry.getKey().equals("CookEmail")){
+                                cookEmail.add(entry.getValue().toString());
+                            }
                         }
                     }
-                    for(int i=0;i<allergens.size();i++){
-                        Meal meal = new Meal(name.get(i),mealType.get(i),cuisineType.get(i),price.get(i));
-                        mealList.add(meal);
+                    int i=0;
+                    //for(int i=0;i<allergens.size();i++){
+                    while(i<allergens.size()){
+                        if(isOffered.get(i).equals("true")) {
+                            Meal meal = new Meal(name.get(i), mealType.get(i), cuisineType.get(i), price.get(i));
+                            mealList.add(meal);
+                            i++;
+                        }
+                        else{
+                            allergens.remove(i);
+                            cuisineType.remove(i);
+                            description.remove(i);
+                            ingredients.remove(i);
+                            mealType.remove(i);
+                            name.remove(i);
+                            price.remove(i);
+                            isOffered.remove(i);
+                            cookEmail.remove(i);
+                        }
                     }
                     MealListAdapter adapter = new MealListAdapter(getApplicationContext(), R.layout.client_meal_adapter_layout, mealList);
                     mealView.setAdapter(adapter);
+                    mealView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                            Intent i = new Intent(clientMealList.this, MealDescription.class);
+                            i.putExtra("Meal", name.get(position));
+                            i.putExtra("Type", mealType.get(position));
+                            i.putExtra("Description", description.get(position));
+                            i.putExtra("Ingredients", ingredients.get(position));
+                            i.putExtra("Price", price.get(position));
+                            i.putExtra("Cuisine Type", cuisineType.get(position));
+                            i.putExtra("Allergens", allergens.get(position));
+                            i.putExtra("email", email);
+                            i.putExtra("cookEmail", cookEmail.get(position));
+                            startActivity(i);
+                        }
+                    });
                 }
             }
         });

@@ -19,7 +19,11 @@ public class ClientWelcome extends AppCompatActivity {
     }
 
     public void goToSeachMeals(View v){
-        startActivity(new Intent(this, clientMealList.class));
+        Bundle extras = getIntent().getExtras();
+        String email = extras.getString("email");
+        Intent i = new Intent(this, clientMealList.class);
+        i.putExtra("email", email);
+        startActivity(i);
     }
 
 }

@@ -13,6 +13,27 @@
         android:theme="@style/Theme.Mealer"
         tools:targetApi="31">
         <activity
+            android:name=".cookOrders"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MealCheckout"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MealDescription"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".clientMealList"
             android:exported="false">
             <meta-data

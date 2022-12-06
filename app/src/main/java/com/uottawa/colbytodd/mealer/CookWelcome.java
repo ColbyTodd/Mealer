@@ -29,4 +29,9 @@ public class CookWelcome extends AppCompatActivity {
         intent.putExtra("EMAIL", email);
         startActivity(intent);
     }
+    public void onViewOrdersClick(View v){
+        Intent intent = new Intent(this, cookOrders.class);
+        intent.putExtra("EMAIL", email);
+        startActivity(intent);
+    }
 }

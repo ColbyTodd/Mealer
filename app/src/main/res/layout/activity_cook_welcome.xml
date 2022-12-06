@@ -46,7 +46,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="98dp" />
+            android:layout_height="80dp" />
 
         <Button
             android:id="@+id/viewMenu"
@@ -57,9 +57,16 @@
             android:onClick="onViewMenuClick"
             android:text="View Menu" />
 
+        <Button
+            android:id="@+id/goToOrders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Orders" />
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="98dp" />
+            android:layout_height="81dp" />
 
         <Button
             android:id="@+id/LogOff"
