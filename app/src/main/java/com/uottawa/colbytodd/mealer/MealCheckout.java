@@ -63,9 +63,12 @@ public class MealCheckout extends AppCompatActivity {
                 mDocRef = db.document("clients/" + email + "/purchases/" + meal);
                 Map<String, Object> purchase = new HashMap<String, Object>();
                 purchase.put("Meal", meal);
-                purchase.put("Rating", "");
+                purchase.put("Status", "");
+                purchase.put("Cook", ""); //figure out how to get the cook email here
                 mDocRef.set(purchase);
-                startActivity(new Intent(MealCheckout.this, ClientWelcome.class));
+                Intent i = new Intent(MealCheckout.this, ClientWelcome.class);
+                i.putExtra("email", email);
+                startActivity(i);
             }
         });
 
