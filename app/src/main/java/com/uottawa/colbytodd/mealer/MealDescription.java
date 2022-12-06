@@ -43,6 +43,8 @@ public class MealDescription extends AppCompatActivity {
         TextView price = findViewById(R.id.mealPriceText);
         TextView cuisineType = findViewById(R.id.mealCuisineTypeText);
         TextView allergens = findViewById(R.id.mealAllergenText);
+        TextView cookEmailText = findViewById(R.id.cookEmailText);
+
         email = extras.getString("email");
         String mealName = extras.getString("Meal");
         String mealType = extras.getString("Type");
@@ -51,6 +53,7 @@ public class MealDescription extends AppCompatActivity {
         String mealPrice = extras.getString("Price");
         String mealCuisineType = extras.getString("Cuisine Type");
         String mealAllergens = extras.getString("Allergens");
+        String mealCookEmail = extras.getString("cookEmail");
         findViewById(R.id.mealDetailProceed).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -64,6 +67,7 @@ public class MealDescription extends AppCompatActivity {
                 i.putExtra("last", last);
                 i.putExtra("Meal", mealName);
                 i.putExtra("Price", mealPrice);
+                i.putExtra("cookEmail", mealCookEmail);
                 startActivity(i);
             }
         });
@@ -75,6 +79,7 @@ public class MealDescription extends AppCompatActivity {
         price.setText("$" + mealPrice);
         cuisineType.setText(mealCuisineType);
         allergens.setText(mealAllergens);
+        cookEmailText.setText(mealCookEmail);
 
         db.collection("clients").document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

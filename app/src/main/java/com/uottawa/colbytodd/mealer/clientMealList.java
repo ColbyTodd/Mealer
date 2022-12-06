@@ -61,6 +61,7 @@ public class clientMealList extends AppCompatActivity {
                     List<String> name = new ArrayList<>();
                     List<String> price = new ArrayList<>();
                     List<String> isOffered = new ArrayList<>();
+                    List<String> cookEmail = new ArrayList<>();
 
                     documents = document.getDocuments();
                     for(DocumentSnapshot s : documents){
@@ -90,6 +91,9 @@ public class clientMealList extends AppCompatActivity {
                             else if(entry.getKey().equals("isOffered")){
                                 isOffered.add(entry.getValue().toString());
                             }
+                            else if(entry.getKey().equals("CookEmail")){
+                                cookEmail.add(entry.getValue().toString());
+                            }
                         }
                     }
                     int i=0;
@@ -109,6 +113,7 @@ public class clientMealList extends AppCompatActivity {
                             name.remove(i);
                             price.remove(i);
                             isOffered.remove(i);
+                            cookEmail.remove(i);
                         }
                     }
                     MealListAdapter adapter = new MealListAdapter(getApplicationContext(), R.layout.client_meal_adapter_layout, mealList);
@@ -125,6 +130,7 @@ public class clientMealList extends AppCompatActivity {
                             i.putExtra("Cuisine Type", cuisineType.get(position));
                             i.putExtra("Allergens", allergens.get(position));
                             i.putExtra("email", email);
+                            i.putExtra("cookEmail", cookEmail.get(position));
                             startActivity(i);
                         }
                     });

@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class MealCheckout extends AppCompatActivity {
     Bundle extras;
-    String email, address, card, cvv, expiration, first, last, meal, price;
+    String email, address, card, cvv, expiration, first, last, meal, price, cookEmail;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference mDocRef;
 
@@ -36,6 +36,7 @@ public class MealCheckout extends AppCompatActivity {
         last = extras.getString("last");
         meal = extras.getString("Meal");
         price = extras.getString("Price");
+        cookEmail = extras.getString("cookEmail");
 
         TextView emailText = findViewById(R.id.orderEmailText);
         TextView firstText = findViewById(R.id.orderFirstText);
@@ -64,8 +65,13 @@ public class MealCheckout extends AppCompatActivity {
                 Map<String, Object> purchase = new HashMap<String, Object>();
                 purchase.put("Meal", meal);
                 purchase.put("Status", "");
-                purchase.put("Cook", ""); //figure out how to get the cook email here
+                purchase.put("Cook", cookEmail); //figure out how to get the cook email here
                 mDocRef.set(purchase);
+                mDocRef = db.document("cooks/" + cookEmail + "/orders/" + meal);
+                Map<String, Object> order = new HashMap<String, Object>();
+                order.put("Meal",meal);
+                order.put("Client Email",email);
+                mDocRef.set(order);
                 Intent i = new Intent(MealCheckout.this, ClientWelcome.class);
                 i.putExtra("email", email);
                 startActivity(i);
