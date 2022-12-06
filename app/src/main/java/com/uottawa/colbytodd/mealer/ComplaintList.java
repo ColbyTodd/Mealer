@@ -1,5 +1,7 @@
 package com.uottawa.colbytodd.mealer;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +9,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,9 +28,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.text.SimpleDateFormat;
@@ -190,6 +196,22 @@ public class ComplaintList extends AppCompatActivity implements DatePickerDialog
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        db.collection("cooks").document(email).collection("menu")
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot mealList : task.getResult()) {
+                                                db.collection("cooks")
+                                                        .document(email).collection("menu").document(mealList.getId())
+                                                        .update("isOffered",false);
+                                            }
+                                        } else {
+                                            Log.d("TEST", "Error getting documents: ", task.getException());
+                                        }
+                                    }
+                                });
                         dateText.setText(email + " account has been successfully suspended until " + calDate);
                     }
                 })

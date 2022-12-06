@@ -65,7 +65,6 @@ public class clientMealList extends AppCompatActivity {
                     documents = document.getDocuments();
                     for(DocumentSnapshot s : documents){
                         Map<String, Object> map = s.getData();
-                        int i = 0;
                         for (Map.Entry<String, Object> entry : map.entrySet()) {
                             if(entry.getKey().equals("Allergens")){
                                 allergens.add(entry.getValue().toString());
@@ -99,7 +98,6 @@ public class clientMealList extends AppCompatActivity {
                                 isOffered.add(entry.getValue().toString());
                                 Log.d("TEST","8");
                             }
-                            i++;
                         }
                     }
                     for(int i=0;i<allergens.size();i++){
