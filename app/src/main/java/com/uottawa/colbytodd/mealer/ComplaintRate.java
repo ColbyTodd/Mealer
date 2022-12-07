@@ -9,9 +9,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import org.w3c.dom.Text;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ComplaintRate extends AppCompatActivity {
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     String email, cook;
 
     @Override
@@ -45,22 +52,12 @@ public class ComplaintRate extends AppCompatActivity {
                             public void onClick(DialogInterface d, int which) {
                                 // The 'which' argument contains the index position
                                 // of the selected item;
-                                switch (which) {
-                                    case 1:
-                                        break;
-                                    case 2:
-                                        break;
-                                    case 3:
-                                        break;
-                                    case 4:
-                                        break;
-                                    case 5:
-                                        break;
-                                }
-
+                                DocumentReference mDocRef = db.document("cooks/" + cook + "/ratings/" + email);
+                                Map<String, Object> rating = new HashMap<String, Object>();
+                                rating.put("rating", which + 1);
+                                mDocRef.set(rating);
                             }
                         });
-
         // 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
         AlertDialog dialog = builder.create();
 
