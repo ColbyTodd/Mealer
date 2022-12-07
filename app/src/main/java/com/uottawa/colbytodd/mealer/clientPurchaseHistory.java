@@ -79,7 +79,7 @@ public class clientPurchaseHistory extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id){
 
-                                    Intent i = new Intent(clientPurchaseHistory.this, FileComplaint.class);
+                                    Intent i = new Intent(clientPurchaseHistory.this, ComplaintRate.class);
                                     i.putExtra("Email", email);
                                     i.putExtra("Cook", documents.get(position).getCook());
                                     startActivity(i);
