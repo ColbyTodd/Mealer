@@ -22,6 +22,15 @@
             android:value="" />
         </activity>
         <activity
+
+            android:name=".cookProfile"
+            android:exported="false">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".FileComplaint"
             android:exported="false">
             <meta-data
