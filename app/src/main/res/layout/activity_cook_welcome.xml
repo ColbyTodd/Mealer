@@ -62,7 +62,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:onClick="onViewOrdersClick"
             android:text="Orders" />
+
+        <Button
+            android:id="@+id/yourProfileBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="onViewProfileClick"
+            android:text="Your Profile" />
 
         <Space
             android:layout_width="match_parent"
