@@ -3,11 +3,14 @@ package com.uottawa.colbytodd.mealer;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.firestore.DocumentReference;
@@ -85,13 +88,26 @@ public class ComplaintRate extends AppCompatActivity {
         // 1. Instantiate an <code><a href="/reference/android/app/AlertDialog.Builder.html">AlertDialog.Builder</a></code> with its constructor
         AlertDialog.Builder builder = new AlertDialog.Builder(ComplaintRate.this);
 
-        //Set the view
-        builder.setView(R.layout.complaint_dialog);
+        // Get the layout inflater
+        LayoutInflater inflater = ComplaintRate.this.getLayoutInflater();
+        View promptUserView = inflater.inflate(R.layout.complaint_dialog, null);
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView(promptUserView);
+
+        final EditText description = (EditText) promptUserView.findViewById(R.id.complaintText);
 
         // Add the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked OK button
+
+                DocumentReference mDocRef = db.document("complaints/" + cook);
+                Map<String, Object> complaint = new HashMap<String, Object>();
+                complaint.put(email, description.getText().toString());
+                mDocRef.set(complaint);
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
